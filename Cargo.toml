@@ -1,0 +1,18 @@
+[package]
+name = "av1an-vmaf"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+av1an-core = { git = "https://github.com/master-of-zen/Av1an", branch = "master" }
+env_logger = "0.10"
+log = "0.4"
+serde_json = "1"
+ffmpeg-the-third = "1.2.2"
+
+[dependencies.clap]
+version = "4"
+features = ["cargo"]

@@ -1,0 +1,57 @@
+* av1an VMAF Wrapper
+** Overview
+=av1an-vmaf= is a command-line tool that serves as a wrapper for running
+VMAF (Video Multimethod Assessment Fusion) on video files. It utilizes
+the =av1an_core= library for VMAF calculations and provides a convenient
+interface for users to assess the quality of distorted videos compared
+to reference videos.
+
+** Prerequisites
+- Rust: Make sure you have Rust installed on your system. You can
+  install it by following the instructions at
+  [[https://www.rust-lang.org/learn/get-started]].
+- ffmpeg: Ensure that ffmpeg is installed on your system. The tool
+  relies on ffmpeg for video processing.
+
+** Usage
+#+begin_src sh
+av1an-vmaf -d <distorted_file> -r <reference_file> -o <output_file> [OPTIONS]
+#+end_src
+
+*** Options
+- =-d, --distorted <FILE>=: Specifies the distorted video file
+  (required).
+- =-r, --reference <FILE>=: Specifies the reference video file
+  (required).
+- =-o, --output <FILE>=: Specifies the output JSON or SVG plot file
+  (required).
+- =-m, --model <MODEL>=: Specifies the VMAF model to use (optional).
+- =--res <RES>=: Specifies the resolution to run VMAF with (default:
+  1920x1080).
+- =-s, --scaler <SCALER>=: Specifies the scaler to use (default:
+  bicubic).
+- =-t, --threads <THREADS>=: Specifies the number of threads to use
+  (default: 0, auto-detect).
+
+*** Example
+#+begin_src sh
+av1an-vmaf -d distorted_video.mp4 -r reference_video.mp4 -o output.svg -m /usr/share/model/vmaf_4k_v0.6.1.json --res 3840x2160 -s bilinear -t 4096
+#+end_src
+
+** Dependencies
+- =av1an_core=: The core library for VMAF calculations.
+- =clap=: Command-line argument parsing.
+- =env_logger=: Environment-based logger for outputting log messages.
+
+** Building from Source
+To build =av1an= from source, navigate to the project directory and run:
+
+#+begin_src sh
+cargo build --release
+#+end_src
+
+This will generate the executable in the =target/release= directory.
+
+** License
+This project is licensed under the AGPLv3 License - see the
+[[file:LICENSE]] file for details.
